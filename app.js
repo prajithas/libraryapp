@@ -130,8 +130,8 @@ app.delete('/api/remove/:id',(req,res)=>{
 
 
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/frontend/index.html'));
+app.get('*', function(req, res) {
+  res.sendFile('./dist/frontend/index.html');
  });
 
 const port= (process.env.PORT || 5000);
