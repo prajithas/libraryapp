@@ -56,9 +56,11 @@ app.post('/api/login',(req,res)=>{
   if(!user){
       res.status(401).send("Invalid Username")
   }else{
+    let username=user.username;
       if(user.password!==userData.password){
           res.status(401).send("Invalid Password")
       }else{
+        let password=user.password;
           let payload = {subject:username+password}
           let token = jwt.sign(payload,'secretKey')
           res.status(200).send({token});
