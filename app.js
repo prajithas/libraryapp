@@ -56,7 +56,7 @@ app.post('/api/login',(req,res)=>{
   if(!user){
       res.status(401).send("Invalid Username")
   }else{
-    let username=user.username;
+    let username=user.username;console.log(username);
       if(user.password!==userData.password){
           res.status(401).send("Invalid Password")
       }else{
