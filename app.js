@@ -35,7 +35,7 @@ function verifyToken(req,res,next){
   if(!req.headers.authorization){
       return res.status(401).send('Unauthorized request')
   }
-  let token = req.headers.authorization.split('')[1]
+  let token = req.headers.authorization.split(' ')[1]
   if(token=='null'){
       return res.status(401).send('Unauthorizes request')
   }
@@ -79,7 +79,7 @@ user.save();
 }
 );
 //Insert a new book
-app.post('/api/insert',function(req,res){
+app.post('/api/insert',verifyToken,function(req,res){
    //console.log(token);
   console.log(req.body);
  
