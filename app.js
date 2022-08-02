@@ -8,8 +8,8 @@ app.use(cors());
 const jwt= require('jsonwebtoken');
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-username="admin";
-password="1234";
+// username="admin";
+// password="1234";
 app.use(express.static('./dist/frontend'));
 /*Routing Methods*/
 app.get('/api/',function(req,res){
@@ -51,11 +51,12 @@ function verifyToken(req,res,next){
 app.post('/api/login',(req,res)=>{
   let userData= req.body;
   console.log(userData);
-  
-  if(!username){
+  UserData.findOne({ email: req.body.username})
+  .then((user)=>{
+  if(!user){
       res.status(401).send("Invalid Username")
   }else{
-      if(password!==userData.password){
+      if(user.password!==userData.password){
           res.status(401).send("Invalid Password")
       }else{
           let payload = {subject:username+password}
@@ -63,7 +64,7 @@ app.post('/api/login',(req,res)=>{
           res.status(200).send({token});
       }
   }
-
+})
 });
 app.post('/api/register',(req,res)=>{
   let userData= req.body;
