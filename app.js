@@ -53,10 +53,10 @@ app.post('/api/login',(req,res)=>{
   console.log(userData);
   UserData.findOne({ email: req.body.username})
   .then((user)=>{
-  if(!user){
+  if(!user){console.log(user.email);
       res.status(401).send("Invalid Username")
   }else{
-    let username=user.username;console.log(username);
+    let username=user.email;console.log(username);
       if(user.password!==userData.password){
           res.status(401).send("Invalid Password")
       }else{
